@@ -1,14 +1,15 @@
-all:	 JR.o concorrentes.o 
-	@g++  JR.o  concorrentes.o -o concorrentes -lpthread -g
+.PHONY: all
+all: JR.o concorrentes.o 
+	@$(CXX) $^ -o concorrentes -lpthread -g
 
-JR.o:
-	@g++ -Wall -c JR.c -lpthread -g
+%.o:
+	@$(CXX) -c $(@:.o=.c) -Wall -g
 
-concorrentes.o:
-	@g++  -Wall -c concorrentes.c -g
-
+.PHONY: clean
 clean:
 	@rm *.o concorrentes
 	@rm -r out/*/*/*
+	
+.PHONY: run
 run:
 	@./concorrentes
